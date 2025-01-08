@@ -162,15 +162,15 @@ void setup() {
 
 void loop() {
   // Do nothing. Everything is done in another task by the web server
-  delay(100);
+  delay(10000);
 
   camera_fb_t *fb = NULL;
   fb = esp_camera_fb_get();
-  if (!fb) {
-    Serial.println("did not get camera data");
-  } else {
-    Serial.println("get camera data");    
-  }
+  // if (!fb) {
+  //   Serial.println("did not get camera data");
+  // } else {
+  //   // Serial.println("get camera data");    
+  // }
 
   if (fb->format != PIXFORMAT_RGB565) {
     Serial.println("not supported type");
