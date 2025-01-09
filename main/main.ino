@@ -145,24 +145,24 @@ void setup() {
   // WiFi.setTxPower(WIFI_POWER_13dBm);
   Serial.println("Connecting to Wi-Fi");
 
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-    Serial.print(".");
-  }
-  Serial.println("");
-  Serial.println("WiFi connected");
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(500);
+  //   Serial.print(".");
+  // }
+  // Serial.println("");
+  // Serial.println("WiFi connected");
 
-  startCameraServer();
+  // // startCameraServer();
 
-  Serial.print("Camera Ready! Use 'http://");
-  Serial.print(WiFi.localIP());
-  Serial.println("' to connect");
+  // Serial.print("Camera Ready! Use 'http://");
+  // Serial.print(WiFi.localIP());
+  // Serial.println("' to connect");
   
 }
 
 void loop() {
   // Do nothing. Everything is done in another task by the web server
-  delay(10000);
+  delay(1000);
 
   camera_fb_t *fb = NULL;
   fb = esp_camera_fb_get();
