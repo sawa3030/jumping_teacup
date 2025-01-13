@@ -43,6 +43,7 @@
 
 size_t out_len, out_width, out_height;
 uint8_t *out_buf;
+int jump_times;
 
 void startCameraServer();
 void setupLedFlash(int pin);
@@ -158,6 +159,7 @@ void setup() {
   // Serial.print(WiFi.localIP());
   // Serial.println("' to connect");
   
+  pinMode(5, OUTPUT);
 }
 
 void loop() {
@@ -197,9 +199,29 @@ void loop() {
   // std::list<dl::detect::result_t> &results = s2.infer((uint16_t *)fb->buf, {(int)fb->height, (int)fb->width, 3}, candidates);
     
   if (results.size() > 0) {
-    Serial.println("detected");
+    jump_times = 3;
+  // if (fb) {
+    // Serial.println("detected");
+    // for(int i = 0; i < 3; i++){
+    //   digitalWrite(5, HIGH);
+    //   delay(275);
+    //   digitalWrite(5, LOW);
+    //   if(i == 2){
+    //     break;
+    //   }
+    //   delay(1000);
+    // }
+  } if (fb) {
+    Serial.println("fb");
   }
 
   free(out_buf);
   esp_camera_fb_return(fb);
+
+  if(jump_times > 0){
+    digitalWrite(5, HIGH);
+    delay(275);
+    digitalWrite(5, LOW);
+    jump_times--;
+  }
 }
