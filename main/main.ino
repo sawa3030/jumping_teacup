@@ -44,6 +44,7 @@
 size_t out_len, out_width, out_height;
 uint8_t *out_buf;
 int jump_times;
+int not_move_times;
 
 void startCameraServer();
 void setupLedFlash(int pin);
@@ -160,6 +161,7 @@ void setup() {
   // Serial.println("' to connect");
   
   pinMode(5, OUTPUT);
+  not_move_times = 0;
 }
 
 void loop() {
@@ -200,6 +202,7 @@ void loop() {
     
   if (results.size() > 0) {
     jump_times = 3;
+    not_move_times = 0;
   // if (fb) {
     // Serial.println("detected");
     // for(int i = 0; i < 3; i++){
@@ -211,8 +214,17 @@ void loop() {
     //   }
     //   delay(1000);
     // }
-  } if (fb) {
-    Serial.println("fb");
+  // } else if(fb) {
+  //   Serial.println("fb");
+    // jump_times = 3;
+  } else {
+    Serial.println("fb not found");
+    not_move_times++;
+  }
+
+  if(not_move_times > 20) {
+    jump_times = 3;
+    not_move_times = 0;
   }
 
   free(out_buf);
